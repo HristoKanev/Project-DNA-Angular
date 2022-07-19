@@ -1,0 +1,10 @@
+<h2>My Genes</h2>
+<ul class="genes">
+  <li *ngFor = "let gene of genes">
+    <button [class.selected]="gene===selectedGene" type="button" (click)="onSelect(gene)">
+      <span class="badge">{{gene.id}}</span>
+      <span class="name">{{gene.name}}</span>
+    </button>
+  </li>
+</ul>
+<app-gene-detail [gene]="selectedGene"></app-gene-detail>

@@ -1,10 +1,7 @@
-<h2>My Genes</h2>
 <ul class="genes">
-  <li *ngFor = "let gene of genes">
-    <button [class.selected]="gene===selectedGene" type="button" (click)="onSelect(gene)">
-      <span class="badge">{{gene.id}}</span>
-      <span class="name">{{gene.name}}</span>
-    </button>
-  </li>
-</ul>
-<app-gene-detail [gene]="selectedGene"></app-gene-detail>
+    <li *ngFor="let gene of genes">
+      <a routerLink="/detail/{{gene.id}}">
+        <span class="badge">{{gene.id}}</span> {{gene.name}}
+      </a>
+    </li>
+  </ul>

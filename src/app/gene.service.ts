@@ -15,4 +15,10 @@ export class GeneService {
     return genes;
   }
   constructor(private messageService: MessageService) { }
+  getGene(id: number): Observable<Gene> {
+    
+    const gene = GENES.find(h => h.id === id)!;
+    this.messageService.add(`HeroService: fetched gene id=${id}`);
+    return of(gene);
+  }
 }

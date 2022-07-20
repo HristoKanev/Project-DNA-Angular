@@ -18,7 +18,7 @@ export class GeneService {
   getGene(id: number): Observable<Gene> {
     
     const gene = GENES.find(h => h.id === id)!;
-    this.messageService.add(`HeroService: fetched gene id=${id}`);
+    this.messageService.add(`GeneService: fetched gene id=${id}`);
     return of(gene);
   }
 }

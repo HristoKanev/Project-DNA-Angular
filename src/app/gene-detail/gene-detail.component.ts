@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 
 import { GeneService } from '../gene.service';
 import { AfterViewInit } from '@angular/core';
+import { ExpressionStatement } from '@angular/compiler';
 
 @Component({
   selector: 'app-gene-detail',
@@ -56,10 +57,10 @@ ngAfterViewInit():void {
       };
     }
     }
-    return biggestNumber
+    return biggestNumber;
   }
   private draw(){
-    let maxLength: number =1450;
+    let maxLength: number =1350;
     let pxBetweenTranscripts: number=100;
     let currPxBetweenTrans: number = 0;
     let startNumber: number;
@@ -85,15 +86,32 @@ ngAfterViewInit():void {
       console.log(trans.strand);
       currPxBetweenTrans += pxBetweenTranscripts;
       currentLength = (trans.exons[trans.exons.length-1].stop-startNumber)/coefficient;
+      for(var cd of trans.cds)
       for( var exon of trans.exons)
       {
+        if(exon.start>cd.start && exon.stop<cd.stop) this.context.fillRect(50+(exon.start-startNumber)/coefficient, currPxBetweenTrans-10,(exon.stop-exon.start)/coefficient,20);
+         else if(exon.start<cd.start && exon.stop<= cd.start || exon.start>=cd.stop && exon.stop> cd.stop )
         this.context.fillRect(50+(exon.start-startNumber)/coefficient, currPxBetweenTrans-4,(exon.stop-exon.start)/coefficient,10);
+        
+        else if(exon.start<=cd.stop && exon.stop>=cd.stop)
+        {
+          this.context.fillRect(50+(exon.start-startNumber)/coefficient, currPxBetweenTrans-10,(cd.stop-exon.start)/coefficient,20);
+          this.context.fillRect(50+(cd.stop-startNumber)/coefficient, currPxBetweenTrans-4,(exon.stop-cd.stop)/coefficient,10);
+       }
+        else if(exon.start<=cd.start && exon.stop>=cd.start)
+        {
+        this.context.fillRect(50+(exon.start-startNumber)/coefficient, currPxBetweenTrans-4,(cd.start-exon.start)/coefficient,10);
+        this.context.fillRect(50+(cd.start-startNumber)/coefficient, currPxBetweenTrans-10,(exon.stop-cd.start)/coefficient,20);
+        }
+    
+        
+        
       }
       this.context.fillRect(50, currPxBetweenTrans, currentLength, 1);
-      this.context.fillText("Stop: " + String(finishNumber),50,currPxBetweenTrans+20)
-      this.context.fillText("Transcript id: " + trans.transcript_id,50,currPxBetweenTrans+40)
-      this.context.fillText("Transcript chrom: " + trans.chrom,50,currPxBetweenTrans+60)
-      this.context.fillText("Transcript strand: " + trans.strand,50,currPxBetweenTrans+80)
+      this.context.fillText("Stop: " + String(finishNumber),50,currPxBetweenTrans+20);
+      this.context.fillText("Transcript id: " + trans.transcript_id,50,currPxBetweenTrans+40);
+      this.context.fillText("Transcript chrom: " + trans.chrom,50,currPxBetweenTrans+60);
+      this.context.fillText("Transcript strand: " + trans.strand,50,currPxBetweenTrans+80);
 
     }
   }

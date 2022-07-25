@@ -60,7 +60,7 @@ ngAfterViewInit():void {
     return biggestNumber;
   }
   private draw(){
-    let maxLength: number =1350;
+    let maxLength: number =1150;
     let pxBetweenTranscripts: number=100;
     let currPxBetweenTrans: number = 0;
     let startNumber: number;

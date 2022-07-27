@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { GenesComponent } from './genes/genes.component';
 import { GeneDetailComponent } from './gene-detail/gene-detail.component';
 import { MessagesComponent } from './messages/messages.component';
+import {  HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { MessagesComponent } from './messages/messages.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

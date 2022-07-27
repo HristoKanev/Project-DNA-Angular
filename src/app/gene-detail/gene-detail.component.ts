@@ -29,13 +29,17 @@ public context!:
 CanvasRenderingContext2D
 ngAfterViewInit():void {
   this.context = this.myCanvas.nativeElement.getContext('2d');
-  this.draw();
+  
 }
 
   getGene(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.heroService.getGene(id)
-      .subscribe(gene => this.gene = gene);
+      .subscribe(gene => {
+        this.gene = gene;
+        this.draw();
+
+      });
   }
   goBack(): void {
     this.location.back();

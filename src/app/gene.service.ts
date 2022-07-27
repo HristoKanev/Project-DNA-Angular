@@ -26,9 +26,11 @@ export class GeneService {
     
     const gene =  this.httpClient.get(`http://127.0.0.1:8000/genes/${id}`).pipe(
       map(data => data as Gene),
+      
       catchError(error => throwError(`Gene with ${id} not found`))
     );
+   // const gene = GENES.find(g=>g.id==id) as Gene;
     this.messageService.add(`GeneService: fetched gene id=${id}`);
-    return gene;
+    return  (gene);
   }
 }

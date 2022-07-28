@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {Gene} from './gene';
-import { GENES } from './mock-genes';
 import {Observable, of} from 'rxjs';
 import { MessageService } from './message.service.spec';
 import { HttpClient } from '@angular/common/http';
@@ -29,7 +28,7 @@ export class GeneService {
       
       catchError(error => throwError(`Gene with ${id} not found`))
     );
-   // const gene = GENES.find(g=>g.id==id) as Gene;
+   
     this.messageService.add(`GeneService: fetched gene id=${id}`);
     return  (gene);
   }
